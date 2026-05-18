@@ -16,7 +16,6 @@ import { AsyncPipe } from '@angular/common';
 export class TaskList implements OnInit {
   private _store = inject(Store);
   tasks$!: Observable<Task[]>;
-  // --------
 
   getTasks() {
     this.tasks$ = this._store.select(TaskSelectors.selectFilteredTasks);
@@ -32,7 +31,11 @@ export class TaskList implements OnInit {
     this._store.dispatch(TaskActions.toggleTask({ _id: taskId, currCompleted: completed }));
   }
 
-  // ---- Life Cycles Methods ----
+  onDeleteTask(event: any) {
+    const taskId = event._id;
+    this._store.dispatch(TaskActions.deleteTask({ _id: taskId }));
+  }
+
   ngOnInit(): void {
     this.loadTasks();
     this.getTasks();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Task } from '../task.model';
+import { AddTask, Task } from '../task.model';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
@@ -16,8 +16,8 @@ export class TaskServices {
     return this._httpClient.get<Task[]>(this.baseUrl);
   }
 
-  createTask(task: any): Observable<Task> {
-    return this._httpClient.post<Task>(this.baseUrl, task);
+  createTask(task: AddTask): Observable<Task[]> {
+    return this._httpClient.post<Task[]>(this.baseUrl, task);
   }
 
   // take updated completed
@@ -25,7 +25,7 @@ export class TaskServices {
     return this._httpClient.patch<Task>(`${this.baseUrl}/${id}`, { completed });
   }
 
-  deleteTask(id: string): Observable<void> {
-    return this._httpClient.delete<void>(`${this.baseUrl}/${id}`);
+  deleteTask(id: string): Observable<Task[]> {
+    return this._httpClient.delete<Task[]>(`${this.baseUrl}/${id}`);
   }
 }

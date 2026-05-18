@@ -22,6 +22,23 @@ export const tasksReducer = createReducer(
     isLoading: false,
   })),
 
+  on(TaskActions.createTask, (state,) => ({
+    ...state,
+    isLoading: true,
+  })),
+
+  on(TaskActions.createTaskSuccess, (state, { tasks }) => ({
+    ...state,
+    tasks,
+    isLoading: false,
+  })),
+
+  on(TaskActions.createTaskFailure, (state, { error }) => ({
+    ...state,
+    error,
+    isLoading: false,
+  })),
+
   on(TaskActions.toggleTask, (state) => ({
     ...state,
     isLoading: true,
@@ -36,6 +53,23 @@ export const tasksReducer = createReducer(
   on(TaskActions.setFilter, (state, { filter }) => ({
     ...state,
     filter,
+  })),
+
+  on(TaskActions.deleteTask, (state,) => ({
+    ...state,
+    isLoading: true,
+  })),
+
+  on(TaskActions.deleteTaskSuccess, (state, { tasks }) => ({
+    ...state,
+    tasks,
+    isLoading: false,
+  })),
+
+  on(TaskActions.deleteTaskFailure, (state, { error }) => ({
+    ...state,
+    error,
+    isLoading: false,
   })),
 );
 
